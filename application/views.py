@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from sqlalchemy import create_engine
-from SQLAlchemy_declear import User, Base, Cook, Food
+from SQLAlchemy_declear import User, Base, Cook, Food, init_db
 from sqlalchemy.orm import sessionmaker
 
 from . import app
@@ -12,6 +12,10 @@ def insert_db(object):
     session = DBSession()
     session.add(object)
     session.commit()
+
+@app.before_first_request
+def before_request():
+    init_db()
 
 @app.route('/')
 @app.route('/index')

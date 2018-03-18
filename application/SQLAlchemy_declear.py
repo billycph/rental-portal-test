@@ -3,9 +3,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 from sqlalchemy import PrimaryKeyConstraint, UniqueConstraint, CheckConstraint
+import os.path
+import flask.logging as log
+
 
 Base = declarative_base()
-
 
 class User(Base):
     __tablename__ = 'user'
@@ -14,7 +16,6 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False, index=True)
     email = Column(String(250), nullable=False)
-
 
 class Cook(Base):
     __tablename__ = 'cook'
@@ -27,7 +28,6 @@ class Cook(Base):
     address = Column(String(250), nullable=False)
     zip = Column(Integer, nullable=False)
 
-
 class Food(Base):
     __tablename__ = 'food'
     id = Column(Integer, primary_key=True)
@@ -38,10 +38,15 @@ class Food(Base):
     CheckConstraint('price > 0.0', name='cost_positive')
 
 
-# Create an engine that stores data in the local directory's
-# sqlalchemy_example.db file.
-engine = create_engine('sqlite:///argo_food.db')
 
-# Create all tables in the engine. This is equivalent to "Create Table"
-# statements in raw SQL.
-Base.metadata.create_all(engine)
+def init_db():
+    if os.path.isfile('argo_food.db'):
+        # log.info('data base found')
+        return
+
+    # Create an engine that stores data in the local directory's
+    # sqlalchemy_example.db file.
+    engine = create_engine('sqlite:///argo_food.db')
+    # Create all tables in the engine. This is equivalent to "Create Table"
+    # statements in raw SQL.
+    Base.metadata.create_all(engine)

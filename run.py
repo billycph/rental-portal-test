@@ -11,4 +11,4 @@ PORT = 5000
 # ioloop.start()
 
 # ------- DEVELOPMENT CONFIG -------
-app.run(host='0.0.0.0', port=PORT, debug=True)
+app.run(host='0.0.0.0', port=PORT)
