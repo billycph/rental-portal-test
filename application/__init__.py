@@ -1,10 +1,13 @@
 import logging
 
 from flask import Flask
+from dashboard.views import dashboard
 
 app = Flask(__name__)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
+# Assign the URL prefixes for each blueprint
+app.register_blueprint(dashboard, url_prefix='/dashboard')
 
 from application import views
 from sqlalchemy import create_engine
