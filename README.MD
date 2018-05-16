@@ -2,7 +2,7 @@ This is my little project building up a rental portal for investors.
 
 The application is using Python Flask 
 
-The application is deployed in https://flask-rental.herokuapp.com/ but I am still working on the API so UI is not actually alive. 
+The application is deployed in https://flask-rental.herokuapp.com/dashboard/ but I am still working on the API so UI is not actually alive. 
 
 
 
